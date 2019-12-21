@@ -8,3 +8,9 @@ This gif was created with a reproducible workflow entirely in R. Have a look thr
 
 This is the original river network.  
 ![](context.png)
+
+These are all the river networks reviewed.  
+![](candidate_trees.gif)
+
+These are the ones picked, all straightened up.  
+![](straightened_trees.gif)

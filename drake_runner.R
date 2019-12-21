@@ -38,7 +38,12 @@ plan <- bind_rows(
                             590029958, 630008081, 760005323),
              good_trees = get_good_trees(inventory, good_ones, 
                                          tree_attributes),
-             straight_trees = straighten_trees(good_trees)))
+             straight_trees = straighten_trees(good_trees),
+             gif2 = gifski(list.files("plots", 
+                                      pattern = "^straight_.*", 
+                                      full.names = TRUE), 
+                           gif_file = "straightened_trees.gif", 
+                           delay = 1)))
 
 make(plan)
 
@@ -51,6 +56,4 @@ plan <- bind_rows(plan,
                                             pick, "hydro_holiday.gif")))
 
 make(plan)
-
-
 
