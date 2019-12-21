@@ -36,7 +36,9 @@ source("R/gussy_up.R")
 
 plan <- bind_rows(
   plan,
-  drake_plan(good_trees = get_good_trees(inventory, good_ones),
+  drake_plan(tree_attributes = readRDS(stage_national_data()$attributes),
+             good_trees = get_good_trees(inventory, good_ones, 
+                                         tree_attributes),
              straight_trees = straighten_trees(good_trees)))
 
 make(plan)
@@ -46,6 +48,7 @@ pick <- 760005323
 source("R/plot_card.R")
 
 plan <- bind_rows(plan, 
-                  drake_plan(pc = plot_card(straight_trees, pick, "hydro_holidy.png")))
+                  drake_plan(pc = plot_card(straight_trees, 
+                                            pick, "hydro_holiday.gif")))
 
 make(plan)
