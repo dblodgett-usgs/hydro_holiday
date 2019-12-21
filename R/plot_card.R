@@ -42,6 +42,26 @@ plot_card <- function(straight_trees, pick, file) {
     for(i in 1:4) {
       par(mar = c(0,0,0,0))
       plot(st_geometry(tree$tree), col = NA)
+      usr <- par()$usr
+      par(lheight = 1.25)
+      text(usr[1] + (usr[2] - usr[1]) / 5, usr[4] - (usr[4] - usr[3]) / 3,
+           paste("As we get ready to gather", "with friends and family to have",
+                 "a party, give a gift, and", "celebrate the new decade,",
+                 "it's important to remember", "to have fun, be silly, and",
+                 "to not take things too seriously.",
+                 sep = "\n"), cex = 1.9)
+      text(usr[1] + (usr[2] - usr[1]) / 1.3, usr[4] - (usr[4] - usr[3]) / 2,
+           paste("This card was created by", "searching NHDPlusV2 data",
+                 "for river networks with", "the right characteristics",
+                 "then straigtening them up", "and selecting 'tree' parts",
+                 "from the resulting network.", "Code available from:",
+                 "github.com/dblodgett-usgs/hydro_holiday",
+                 "This is the San Juan River in CO.",
+                 sep = "\n"), cex = 1.7)
+      par(lheight = 1)
+      text(usr[1] + (usr[2] - usr[1]) / 5, usr[4] - (usr[4] - usr[3]) / 1.3,
+           paste("Wishing all my friends", "a happy holidays!!",
+                 sep = "\n"), cex = 2.8)
       plot(st_geometry(trunk), col = "brown", lwd = trunk$StreamOrde / 1.5, add = TRUE)
       plot(st_geometry(main_branches), col = "sandybrown", 
            lwd = main_branches$StreamOrde / 2, add = TRUE)
@@ -53,6 +73,12 @@ plot_card <- function(straight_trees, pick, file) {
       plot(top_bottom$top, pch = 8, col = "gold", lwd = 3, cex = 2, add = TRUE)
     }
   }, gif_file = file, width = 1024, height = 512, delay = 0.5, loop = TRUE)
+  
+  png("context.png")
+  plot_nhdplus(list("comid", as.character(trunk_bottom[1,]$COMID)), 
+               nhdplus_data = "plots/temp.gpkg", gpkg = "plots/temp.gpkg")
+  dev.off
+  
 }
 
 get_lights <- function(points, num_lights, min_distance, tree) {

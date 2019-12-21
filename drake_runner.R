@@ -1,6 +1,5 @@
 library(drake)
 library(sf)
-library(units)
 library(dplyr)
 library(nhdplusTools)
 library(pbapply)
@@ -28,15 +27,15 @@ plan <- drake_plan(forest = readRDS(stage_national_data()$flowline),
 make(plan)
 
 # After flipping through...
-good_ones <- c(10009766, 90011521, 290008836, 390020157, 
-               550025262, 550027957, 590024987, 590029190, 
-               590029958, 630008081, 760005323)
 
 source("R/gussy_up.R")
 
 plan <- bind_rows(
   plan,
   drake_plan(tree_attributes = readRDS(stage_national_data()$attributes),
+             good_ones = c(10009766, 90011521, 290008836, 390020157, 
+                            550025262, 550027957, 590024987, 590029190, 
+                            590029958, 630008081, 760005323),
              good_trees = get_good_trees(inventory, good_ones, 
                                          tree_attributes),
              straight_trees = straighten_trees(good_trees)))
@@ -52,3 +51,6 @@ plan <- bind_rows(plan,
                                             pick, "hydro_holiday.gif")))
 
 make(plan)
+
+
+
