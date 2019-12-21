@@ -56,7 +56,8 @@ plot_card <- function(straight_trees, pick, file) {
                  "then straigtening them up", "and selecting 'tree' parts",
                  "from the resulting network.", "Code available from:",
                  "github.com/dblodgett-usgs/hydro_holiday",
-                 "This is the San Juan River in CO.",
+                 "This is the San Juan River in CO.", 
+                 "\nHere's to a reproducible 2020!!",
                  sep = "\n"), cex = 1.7)
       par(lheight = 1)
       text(usr[1] + (usr[2] - usr[1]) / 5, usr[4] - (usr[4] - usr[3]) / 1.3,
